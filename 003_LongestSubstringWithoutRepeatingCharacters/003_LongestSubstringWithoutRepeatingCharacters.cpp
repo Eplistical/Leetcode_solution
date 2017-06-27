@@ -18,10 +18,11 @@
 // --- include --- // 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <numeric>
 #include <string>
 #include <map>
+#include <cstdlib>
+#include <cmath>
 using namespace std;
 
 // --- solution part --- //
@@ -49,13 +50,28 @@ class Solution {
 			if (indextable.size() > maxlen) maxlen = indextable.size();
 			return maxlen;
 		}
+
+		// use vector as hashtable
+		int lengthOfLongestSubstring2(string s) {
+			const int LEN = s.size();
+			int leftind = 0;
+			int maxlen = 0; 
+			vector<int> indextable(256, -1);
+			char c;
+			for (int rightind = 0; rightind < LEN; ++rightind) {
+				leftind = max(leftind, indextable[s[rightind]] + 1);
+				indextable[s[rightind]] = rightind;
+				maxlen = max(maxlen, rightind - leftind + 1);
+			}
+			return maxlen;
+		}
 };
 
 // --- test part ---//
 int main(int argc, char** argv) {
 	Solution S;
-	string s("umvejcuuk");
+	string s("c");
 	cout << s << "\n";
-	cout << S.lengthOfLongestSubstring(s) << "\n"; 
+	cout << S.lengthOfLongestSubstring2(s) << "\n"; 
 	return 0;
 }
