@@ -3,18 +3,17 @@
  */
 
 #include "showvec.hpp"
+#include "showmap.hpp"
 
 // --- include --- // 
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <string>
 using namespace std;
 
 // --- solution part --- //
-class Solution {
-	public:
-};
 
 
 // --- test part ---//

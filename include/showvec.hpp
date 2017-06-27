@@ -5,8 +5,8 @@
 #include <vector>
 
 template <typename ParamType> 
-inline void showvec(std::vector<ParamType> v) {
-	for (auto& i : v) {
+inline void showvec(const std::vector<ParamType>& v) {
+	for (const auto& i : v) {
 		std::cout << i << "\t";
 	}
 	std::cout << "\n";
