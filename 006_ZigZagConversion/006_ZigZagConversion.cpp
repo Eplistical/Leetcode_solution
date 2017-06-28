@@ -60,6 +60,25 @@ class Solution {
 			}
 			return rst;
 		}
+
+		// another way to do this
+		string convert2(string s, int numRows) {
+			if (numRows < 2 || s.size() < numRows) return s;
+			int step = 1, r = 0;
+			vector<string> tmp(numRows, "");
+			string rst;
+			for (int i = 0; i < s.size(); ++i) {
+				tmp[r] += s[i];
+				r += step;
+				if (r == 0 or r == numRows - 1) step *= -1;
+			}
+
+			for (auto& str : tmp) {
+				cout << str << "\n";
+				rst += str;
+			}
+			return rst;
+		}
 };
 
 // --- test part ---//
@@ -67,6 +86,6 @@ int main(int argc, char** argv) {
 	Solution S;
 	string s(argv[1]);
 	int numRows = atoi(argv[2]);
-	cout << S.convert(s, numRows) << "\n";
+	cout << S.convert2(s, numRows) << "\n";
 	return 0;
 }
