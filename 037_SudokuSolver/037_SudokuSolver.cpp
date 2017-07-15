@@ -36,10 +36,7 @@ class Solution {
 		}
 
 		bool _solve(vector<string>& board, int col, int row) {
-			vector<int> possible(9, 0); 
-			vector<vector<char> > tmp;
 			int num;
-
 			int nextrow = (row + 1) % 9;
 			int nextcol = col + (row + 1) / 9;
 
@@ -75,14 +72,5 @@ class Solution {
 // --- test part ---//
 int main(int argc, char** argv) {
 	Solution S;
-	vector<string> board {"..9748...","7........",".2.1.9...","..7...24.",".64.1.59.",".98...3..","...8.3.2.","........6","...2759.."};
-	for (string s : board) {
-		cout << s << endl;
-	}
-	cout << endl;
-	S.solveSudoku(board);
-	for (string s : board) {
-		cout << s << endl;
-	}
 	return 0;
 }
