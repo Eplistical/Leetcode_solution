@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <numeric>
 #include <string>
+#include <deque>
 using namespace std;
 
 // --- solution part --- //
@@ -75,13 +76,39 @@ class Solution {
 			}
 			return rst;
 		}
+
+		vector<int> maxSlidingWindow2(vector<int>& nums, int k) {
+			deque<Pair> q;
+			vector<int> rst;
+			if (nums.empty()) return rst;
+			int i;
+			int N = nums.size();
+			int val;
+			while (i < N) {
+				val = nums[i];
+				if (q.empty()) {
+					q.push_back(Pair(i, val));
+				}
+				else {
+					while (!q.empty() and q.back().second < val) {
+						q.pop_back();
+					} 
+					if (not q.empty() and q.front().first < i - k + 1) 
+						q.pop_front();
+					q.push_back(Pair(i, val));
+				}
+				if (i >= k - 1) rst.push_back(q.front().second);
+				++i;
+			}
+			return rst;
+		}
 };
 
 // --- test part ---//
 int main(int argc, char** argv) {
 	Solution S;
-	vector<int> nums {1, -1, 3, 6, 9, 4};
-	int k = 3;
-	showvec(S.maxSlidingWindow(nums, k));
+	vector<int> nums {1, -1};
+	int k = 1;
+	showvec(S.maxSlidingWindow2(nums, k));
 	return 0;
 }
