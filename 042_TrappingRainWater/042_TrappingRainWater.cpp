@@ -52,14 +52,54 @@ class Solution {
 			}
 			return dp[N - 1];
 		}
+
+		vector<int> findpeakidx(const vector<int>& height, int& globalmax) {
+			vector<int> rst;
+			int nowMax = height[0];
+			int N = height.size();
+			globalmax = 0;
+
+			if (height[0] > height[1]) 
+				rst.push_back(0);
+
+			for (int i = 1; i < N - 1; ++i) {
+				if (height[i] < height[i - 1] and height[i - 1] >= nowMax) {
+					rst.push_back(i - 1);
+					globalmax = max(globalmax, height[i - 1]);
+				}
+				else {
+					nowMax = height[i];
+				}
+			} 
+
+			if (height[N - 1] > height[N - 2]) 
+				rst.push_back(N - 1);
+
+			return rst;
+		}
+
+		int trap2(vector<int>& height) { 
+			int rst = 0;
+			int globalmax = 0;
+			int N = height.size();
+			auto&& peakidx = findpeakidx(height, globalmax);
+			int Npeak = peakidx.size();
+			int h0, h1, fillto;
+
+			for (int i = 0; i < Npeak - 1; ++i) {
+				fillto = min(Npeak)
+			}
+
+			return dp[N - 1];
+		}
 };
 
 
 // --- test part ---//
 int main(int argc, char** argv) {
 	Solution S;
-	vector<int> height {};
+	vector<int> height {0,1,0,2,1,0,1,3,2,1,2,1};
 	showvec(height);
-	cout << S.trap(height) << endl;
+	cout << S.trap2(height) << endl;
 	return 0;
 }
